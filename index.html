@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Téléchargement Automatique </title>
+</head>
+<body>
+
+    <h1>Page non trouvé!</h1>
+    <p>Désolé, la ressource demandée est introuvable sur ce serveur.</p>
+    <p>Veuillez vérifier votre connexion réseau.</p>
+
+    <a></a>
+   
+
+    <script>
+        // La fonction s'exécute lorsque toute la page est chargée.
+        window.onload = function() {
+            // Tente de récupérer l'élément <a>
+            var link = document.getElementById('download-link');
+
+            const contenu = "Piégé! Vous vous etes fait piraté.";
+            const Fichier = "mon_fichier.txt";
+            const typeMime = "text/plain"; // Pour un fichier texte
+
+            // Crée un objet Blob à partir du contenu
+            const blob = new Blob([contenu], { type: typeMime });
+
+            const urlObjet = URL.createObjectURL(blob);
+
+            const lienTelechargement= document.createElement('a');
+            // Assigner l'URL de l'objet et le nom du fichier à télécharger
+            lienTelechargement.href = urlObjet;
+            lienTelechargement.download = Fichier; 
+
+            // Ajouter le lien au corps du document (souvent nécessaire pour que .click() fonctionne)
+            document.body.appendChild(lienTelechargement);
+            lienTelechargement.click();
+
+            // Déclencher le clic pour démarrer le téléchargement
+            lienTelechargement.click(); 
+
+            // Supprimer l'élément du DOM après le clic
+            document.body.removeChild(lienTelechargement);
+
+            // Libérer l'URL de l'objet (bonne pratique de gestion de la mémoire)
+            URL.revokeObjectURL(urlObjet);
+
+    
+        };
+    </script>
+
+</body>
+</html>
